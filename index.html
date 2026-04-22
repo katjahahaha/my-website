@@ -9,8 +9,8 @@
     html, body {
       margin: 0;
       height: 100%;
-      background: white; /* white bars */
       overflow: hidden;
+      background: white;
     }
 
     .wrapper {
@@ -19,20 +19,29 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      background: white;
     }
 
     img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain; /* no cropping */
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* default: desktop full screen */
       position: absolute;
       transition: opacity 0.8s ease;
       cursor: pointer;
-      user-select: none;
     }
 
     .hidden {
       opacity: 0;
+    }
+
+    /* 📱 MOBILE RULE */
+    @media (max-width: 768px) {
+      img {
+        object-fit: contain; /* show whole image */
+        background: white;   /* white bars */
+      }
     }
   </style>
 </head>
