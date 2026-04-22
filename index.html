@@ -6,35 +6,63 @@
   <title></title>
 
   <style>
-    body {
+    html, body {
       margin: 0;
+      height: 100%;
+      background: white; /* white bars */
       overflow: hidden;
-      background: black;
+    }
+
+    .wrapper {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* no cropping */
+      position: absolute;
+      transition: opacity 0.8s ease;
       cursor: pointer;
-      display: block;
+      user-select: none;
+    }
+
+    .hidden {
+      opacity: 0;
     }
   </style>
 </head>
 
 <body>
 
-<img id="photo" src="Photo1.jpg">
+<div class="wrapper">
+  <img id="img1" src="Photo1.jpg">
+  <img id="img2" src="Photo2.jpg" class="hidden">
+</div>
 
 <script>
-  const photo = document.getElementById("photo");
+  const img1 = document.getElementById("img1");
+  const img2 = document.getElementById("img2");
 
-  let first = true;
+  let showingFirst = true;
 
-  photo.addEventListener("click", () => {
-    photo.src = first ? "Photo2.jpg" : "Photo1.jpg";
-    first = !first;
-  });
+  function toggle() {
+    if (showingFirst) {
+      img1.classList.add("hidden");
+      img2.classList.remove("hidden");
+    } else {
+      img2.classList.add("hidden");
+      img1.classList.remove("hidden");
+    }
+    showingFirst = !showingFirst;
+  }
+
+  img1.addEventListener("click", toggle);
+  img2.addEventListener("click", toggle);
 </script>
 
 </body>
